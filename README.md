@@ -33,6 +33,7 @@ This article describes the steps taken when practicing DNS in a Virtual Machine 
 - Attempted to ping wire again
 
 <h2>Practice Steps</h2>
+
 **A-Record Steps**
 
 <p>
@@ -61,13 +62,6 @@ Returning to Client-1, I attempted to ping "wire" again, and this time it was su
 <br />
 
 **local DNS cache Steps**
-<p>
-<img src="https://github.com/user-attachments/assets/eced10e0-67f4-4ce1-9955-954f7474c897"/>
-</p>
-<p>
-To continue where I left off, I returned to the Domain Controller and changed "wire's" IP address from the Domain Controller's IP to 8.8.8.8. I then attempted to ping "wire" again, and received a response. 
-</p>
-<br />
 
 <p>
 <img src="https://github.com/user-attachments/assets/eced10e0-67f4-4ce1-9955-954f7474c897"/>
@@ -86,8 +80,6 @@ To continue where I left off, I returned to the Domain Controller and changed "w
 This happened because the computer had previously cached the IP address from an external source (in this case, the Domain Controller). When the IP address is changed, the cached DNS entry needs to be flushed to reflect the new address, which I did using ipconfig /flushdns. To verify that the cache was cleared, I ran ipconfig /displaydns, and no entries were found.
 </p>
 <br />
-
-![image]()
 
 <p>
 <img src="https://github.com/user-attachments/assets/49e3a968-4b27-461a-a226-1b6273e6ea50"/>
