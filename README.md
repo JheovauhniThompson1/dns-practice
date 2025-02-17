@@ -9,6 +9,8 @@ This article describes the steps taken when practicing DNS in a Virtual Machine 
 
 - Microsoft Azure (Virtual Machines/Compute)
 - Remote Desktop
+- DNS Manager
+- PowerShell
 
 <h2>Operating Systems Used </h2>
 
@@ -31,6 +33,7 @@ This article describes the steps taken when practicing DNS in a Virtual Machine 
 - Attempted to ping wire again
 
 <h2>Practice Steps</h2>
+**A-Record Steps**
 
 <p>
 <img src="https://github.com/user-attachments/assets/f07458f3-deca-4bda-b99c-4857555ef490"/>
@@ -54,5 +57,41 @@ Since "wire" didn’t exist yet, I decided to create it on the Domain Controller
 </p>
 <p>
 Returning to Client-1, I attempted to ping "wire" again, and this time it was successful. I also ran nslookup to check the result, and sure enough, the Domain Controller's IP address was displayed as "wire's" IP.
+</p>
+<br />
+
+**local DNS cache Steps**
+<p>
+<img src="https://github.com/user-attachments/assets/eced10e0-67f4-4ce1-9955-954f7474c897"/>
+</p>
+<p>
+To continue where I left off, I returned to the Domain Controller and changed "wire's" IP address from the Domain Controller's IP to 8.8.8.8. I then attempted to ping "wire" again, and received a response. 
+</p>
+<br />
+
+<p>
+<img src="https://github.com/user-attachments/assets/eced10e0-67f4-4ce1-9955-954f7474c897"/>
+<img src="https://github.com/user-attachments/assets/9dec7e74-4938-450e-876e-72fb9ce273f9"/>
+</p>
+<p>
+To continue where I left off, I returned to the Domain Controller and changed "wire's" IP address from the Domain Controller's IP to 8.8.8.8. I then attempted to ping "wire" again, and received a response. 
+</p>
+<br />
+
+
+<p>
+<img src="https://github.com/user-attachments/assets/b595c05d-b17f-4388-9bd5-c36f258ff34d"/>
+</p>
+<p>
+This happened because the computer had previously cached the IP address from an external source (in this case, the Domain Controller). When the IP address is changed, the cached DNS entry needs to be flushed to reflect the new address, which I did using ipconfig /flushdns. To verify that the cache was cleared, I ran ipconfig /displaydns, and no entries were found.
+</p>
+<br />
+
+![image]()
+
+<p>
+<img src="https://github.com/user-attachments/assets/49e3a968-4b27-461a-a226-1b6273e6ea50"/>
+</p>
+Lastly, I attempted to ping "wire" again, and it worked. I then checked its IP address by running ipconfig /displaydns in PowerShell, and confirmed that the IP had successfully changed from 10.0.0.4 to 8.8.8.8!
 </p>
 <br />
