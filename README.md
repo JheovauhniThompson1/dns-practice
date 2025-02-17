@@ -15,7 +15,7 @@ This article describes the steps taken when practicing DNS in a Virtual Machine 
 - Windows Server 2022
 - Windows 10 (21H2)
 
-<h2>High-Level Deployment and Configuration Steps</h2>
+<h2>High-Level Practice Steps</h2>
 
 **A-Record Steps**
 - Logged into both the Windows 10(Client-1) and Windows Server(Domain Controller) Virtual Machines as an admin([Click here to find out more about how these were made](https://github.com/JheovauhniThompson1/AD-config))
@@ -30,21 +30,29 @@ This article describes the steps taken when practicing DNS in a Virtual Machine 
 - Flushed the current DNS cache in Client-1
 - Attempted to ping wire again
 
-<h2>Deployment and Configuration Steps</h2>
+<h2>Practice Steps</h2>
 
 <p>
-<img src="https://github.com/user-attachments/assets/9cc56003-0803-47c8-958b-7b5991f7109f"/>
+<img src="https://github.com/user-attachments/assets/f07458f3-deca-4bda-b99c-4857555ef490"/>
 </p>
 <p>
-During the osTicket Project, I had an issue in which I was fully locked out of all of my accounts, including the admin account. To resolve this, I had to enter MySQL and run code under "Query" to change my admin password.
+For this repository, the first step I took was logging into both the Domain Controller and Client-1 (Windows 10 VM) as jane_admin. I then opened PowerShell and attempted to ping "wire." After a few seconds, I received an error message stating that there was no entity called "wire."
 </p>
 <br />
 
 <p>
-<img src="https://github.com/user-attachments/assets/fbd73c85-dfbf-4adc-b746-dd76819d70c3"/>
+<img src="https://github.com/user-attachments/assets/6dcbaba5-3f3c-42f3-b5db-5fcd8f3ee59f"/>
 </p>
 <p>
-Lastly, I went into the "ost_staff" table to update the Agent's passwords' manually. This can be done by double clicking the "passwd" field. The password entered is encrypted and translates to "welcome".
+Since "wire" didn’t exist yet, I decided to create it on the Domain Controller. First, I opened DNS Manager and navigated to the Forward Lookup Zone, where my domain name was located. I then right-clicked on the domain and created a new Host (A) Record called "wire," mapping it to the Domain Controller's private IP address.
 </p>
 <br />
 
+<p>
+<img src="https://github.com/user-attachments/assets/0b664de4-8c76-4e51-8074-f1d32bf807e1"/>
+<img src="https://github.com/user-attachments/assets/6505174e-671a-4c94-b689-37bac70b3290"/>
+</p>
+<p>
+Returning to Client-1, I attempted to ping "wire" again, and this time it was successful. I also ran nslookup to check the result, and sure enough, the Domain Controller's IP address was displayed as "wire's" IP.
+</p>
+<br />
